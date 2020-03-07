@@ -191,7 +191,7 @@ var Module = typeof Module !== 'undefined' ? Module : {};
     }
   
    }
-   loadPackage({"files": [{"start": 0, "audio": 0, "end": 153152, "filename": "/assets/Oswald.ttf"}, {"start": 153152, "audio": 0, "end": 171505, "filename": "/assets/titleimg.png"}, {"start": 171505, "audio": 0, "end": 171705, "filename": "/assets/wsq.png"}], "remote_package_size": 171705, "package_uuid": "ee6dfd21-c8c6-42f7-badf-b348f9607aff"});
+   loadPackage({"files": [{"start": 0, "audio": 0, "end": 153152, "filename": "/assets/Oswald.ttf"}, {"start": 153152, "audio": 0, "end": 171505, "filename": "/assets/titleimg.png"}, {"start": 171505, "audio": 0, "end": 171705, "filename": "/assets/wsq.png"}], "remote_package_size": 171705, "package_uuid": "33ed4a21-fa83-468b-a613-a3953bfeb40d"});
   
   })();
   
