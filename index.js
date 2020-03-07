@@ -191,7 +191,7 @@ var Module = typeof Module !== 'undefined' ? Module : {};
     }
   
    }
-   loadPackage({"files": [{"start": 0, "audio": 0, "end": 153152, "filename": "/assets/Oswald.ttf"}, {"start": 153152, "audio": 0, "end": 171505, "filename": "/assets/titleimg.png"}, {"start": 171505, "audio": 0, "end": 171705, "filename": "/assets/wsq.png"}], "remote_package_size": 171705, "package_uuid": "dad2114e-a1bd-41e3-b13a-52b541815045"});
+   loadPackage({"files": [{"start": 0, "audio": 0, "end": 153152, "filename": "/assets/Oswald.ttf"}, {"start": 153152, "audio": 0, "end": 171505, "filename": "/assets/titleimg.png"}, {"start": 171505, "audio": 0, "end": 171705, "filename": "/assets/wsq.png"}], "remote_package_size": 171705, "package_uuid": "0915764e-750f-4647-bdd8-7fe43e79e1f0"});
   
   })();
   
@@ -1498,11 +1498,11 @@ function updateGlobalBufferAndViews(buf) {
 }
 
 var STATIC_BASE = 1024,
-    STACK_BASE = 6252912,
+    STACK_BASE = 6252944,
     STACKTOP = STACK_BASE,
-    STACK_MAX = 1010032,
-    DYNAMIC_BASE = 6252912,
-    DYNAMICTOP_PTR = 1009872;
+    STACK_MAX = 1010064,
+    DYNAMIC_BASE = 6252944,
+    DYNAMICTOP_PTR = 1009904;
 
 assert(STACK_BASE % 16 === 0, 'stack must start aligned');
 assert(DYNAMIC_BASE % 16 === 0, 'heap must start aligned');
@@ -2043,7 +2043,7 @@ function _emscripten_asm_const_iii(code, sigPtr, argbuf) {
 
 
 
-// STATICTOP = STATIC_BASE + 1009008;
+// STATICTOP = STATIC_BASE + 1009040;
 /* global initializers */  __ATINIT__.push({ func: function() { ___wasm_call_ctors() } });
 
 
@@ -6647,7 +6647,7 @@ function _emscripten_asm_const_iii(code, sigPtr, argbuf) {
     }
 
   function _emscripten_get_sbrk_ptr() {
-      return 1009872;
+      return 1009904;
     }
 
   function _emscripten_glActiveTexture(x0) { GLctx['activeTexture'](x0) }
