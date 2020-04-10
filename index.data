@@ -2327,6 +2327,7 @@ senemy
 	  3, nothing;
   end commands
 end enemy
+senemy
 size: 30; life: 220;
   scommands
       0.0, STARTF;
