@@ -10,6 +10,7 @@
             margin-left: auto;
             margin-right: auto;
             display: block;
+            color: white;
         }
 
         #canvas {
@@ -30,10 +31,12 @@
         textarea.emscripten {
             font-family: monospace;
             width: 80%;
+            color: white;
         }
 
         div.emscripten {
             text-align: center;
+            color: white;
         }
 
         div.emscripten_border {
@@ -48,6 +51,7 @@
         .spinner {
             height: 50px;
             width: 50px;
+
             margin: 0px auto;
             -webkit-animation: rotation .8s linear infinite;
             -moz-animation: rotation .8s linear infinite;
@@ -59,6 +63,19 @@
             border-top: 10px solid rgb(100,0,200);
             border-radius: 100%;
             background-color: rgb(200,100,250);
+        }
+        #status {
+            height: 100px;
+            width: 100px;
+            top:50px;
+            margin: 0px auto;
+            border-left: 10px solid rgb(0,150,240);
+            border-right: 10px solid rgb(0,150,240);
+            border-bottom: 10px solid rgb(0,150,240);
+            border-top: 10px solid rgb(100,0,200);
+            border-radius: 100%;
+            background-color: rgb(200,100,250);
+            color: white;
         }
 
         @-webkit-keyframes rotation {
@@ -104,13 +121,32 @@
 </head>
 <body>
     <hr />
-    <figure style="overflow:visible;" id="spinner"><div class="spinner"></div><center style="margin-top:0.5em"><strong>emscripten</strong></center></figure>
+    
+    <div class="emscripten_border">
+        <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" tabindex=-1></canvas>
+        <figure style="overflow:visible;" id="spinner"><div class="spinner"></div><center style="margin-top:0.5em"><strong>emscripten</strong></center></figure>
     <div class="emscripten" id="status">Downloading...</div>
     <div class="emscripten">
         <progress value="0" max="100" id="progress" hidden=1></progress>
+
     </div>
-    <div class="emscripten_border">
-        <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" tabindex=-1></canvas>
+    <script type='text/javascript'>
+        function resumeAudio(e) {
+      if (typeof Module === 'undefined'
+          || typeof Module.SDL2 == 'undefined'
+          || typeof Module.SDL2.audioContext == 'undefined')
+          return;
+      if (Module.SDL2.audioContext.state == 'suspended') {
+          Module.SDL2.audioContext.resume();
+      }
+      if (Module.SDL2.audioContext.state == 'running') {
+          document.getElementById('canvas').removeEventListener('click', resumeAudio);
+          document.removeEventListener('keydown', resumeAudio);
+      }
+      }
+      document.getElementById('canvas').addEventListener('click', resumeAudio);
+      document.addEventListener('keydown', resumeAudio);
+          </script>
     </div>
     <hr />
     <div class="emscripten">
@@ -127,7 +163,7 @@
     <script type='text/javascript'>
       var statusElement = document.getElementById('status');
       var progressElement = document.getElementById('progress');
-      var spinnerElement = document.getElementById('spinner');
+      var spinnerElement = document.getElementById('progress'); //it's supposed to be spinner instead of progress, but want to stop spinner hiding
 
       var Module = {
         preRun: [],
