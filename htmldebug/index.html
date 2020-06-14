@@ -10,8 +10,14 @@
             margin-left: auto;
             margin-right: auto;
             display: block;
-            color: white;
+            /*color: white;*/
+            color: rgb(30,10,30);
+            border: 0px none;
         }
+
+        hr {
+  border: 0px solid red;
+}
 
         #canvas {
             position: absolute;
@@ -31,7 +37,10 @@
         textarea.emscripten {
             font-family: monospace;
             width: 80%;
-            color: white;
+            /*color: white;*/
+            color: rgb(30,10,30);
+            background-color: rgb(40,10,30);
+
         }
 
         div.emscripten {
@@ -40,7 +49,7 @@
         }
 
         div.emscripten_border {
-            border: 1px solid black;
+            
         }
         /* the canvas *must not* have any border or padding, or mouse coords will be wrong */
         canvas.emscripten {
@@ -119,7 +128,7 @@
         }
     </style>
 </head>
-<body>
+<body style="background-color: rgb(40,10,30);">
     <hr />
     
     <div class="emscripten_border">
