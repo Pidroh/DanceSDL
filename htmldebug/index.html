@@ -3,7 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/ratchet/2.0.2/css/ratchet.css" rel="stylesheet"/>
     <title>Emscripten-Generated Code</title>
+
     <style>
         .emscripten {
             padding-right: 0;
@@ -20,16 +22,18 @@
 }
 
         #canvas {
-            position: absolute;
-            top: 0px;
+            /*position: absolute;*/
+            top: 20px;
             left: 0px;
             bottom: 0px;
             right: 0px;
             margin: auto;
-            width: 100vw;
+            width: 640px;
+            height: 480px;
+            /*width: 100vw;
             height: 133vw;
-            max-width: 75vh;
-            max-height: 100vh;
+            max-width: 68vh;
+            max-height: 90vh;*/
             overflow: hidden;
             display: block;
         }
@@ -131,10 +135,24 @@
 <body style="background-color: rgb(40,10,30);">
     <hr />
     
+    <a href="https://discord.gg/AtGrxpM" target="_blank">Discord Channel</a>
+    &nbsp;
+    <a href="http://www.pidroh.com/" target="_blank">Pidroh's website</a>
+    &nbsp;
+    <a href="https://pidroh.substack.com/" target="_blank">Mail Newsletter</a>
+    &nbsp;
+    <label for="files" class="btn">Upload Save</label>
+    <label for="dwn-btn" class="btn">Download Save</label>
+    <input id = "files" type='file' style="display: none" accept='text/xml' onchange='openFile(event)'>
+      </input>
+    <input id="dwn-btn" value="Download Save" style="display: none" class ="btn" />
+
+
+    &nbsp;
     <div class="emscripten_border">
         <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" tabindex=-1></canvas>
         <figure style="overflow:visible;" id="spinner"><div class="spinner"></div><center style="margin-top:0.5em"><strong>emscripten</strong></center></figure>
-    <div class="emscripten" id="status">Downloading...</div>
+    <div class="emscripten" id="status" hidden=1  style="display:none">Downloading...</div>
     <div class="emscripten">
         <progress value="0" max="100" id="progress" hidden=1></progress>
 
@@ -155,9 +173,54 @@
       }
       document.getElementById('canvas').addEventListener('click', resumeAudio);
       document.addEventListener('keydown', resumeAudio);
-          </script>
+    </script>
+    <script type='text/javascript'>
+        var uploadedSave = false;
+
+        var saveText;
+        var textToDownload = "dummy";
+
+
+      var openFile = function(event) {
+        var input = event.target;
+        
+        var reader = new FileReader();
+        reader.onload = function() {
+              uploadedSave = true;
+            var text = reader.result;
+            saveText = text;
+            
+          };
+          reader.readAsText(input.files[0]);
+        };
+
+
+function download(filename, text) {
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+
+    element.style.display = 'none';
+    document.body.appendChild(element);
+
+    element.click();
+
+    document.body.removeChild(element);
+}
+
+// Start file download.
+document.getElementById("dwn-btn").addEventListener("click", function() {
+  // Generate download of hello.txt file with some content
+  var text = textToDownload;
+  var filename = "savedata.xml";
+
+  download(filename, text);
+}, false);
+ 
+    </script>
     </div>
     <hr />
+    <!--
     <div class="emscripten">
         <input type="checkbox" id="resize">Resize canvas
         <input type="checkbox" id="pointerLock" checked>Lock/hide mouse pointer
@@ -165,7 +228,7 @@
         <input type="button" value="Fullscreen" onclick="Module.requestFullscreen(document.getElementById('pointerLock').checked,
                                                                                 document.getElementById('resize').checked)">
     </div>
-
+    -->
     <hr />
     <textarea class="emscripten" id="output" rows="8"></textarea>
     <hr>
@@ -198,6 +261,8 @@
           if (arguments.length > 1) text = Array.prototype.slice.call(arguments).join(' ');
           console.error(text);
         },
+        
+
         canvas: (function() {
           var canvas = document.getElementById('canvas');
 
